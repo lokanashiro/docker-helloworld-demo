@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: helloworld-deployment-<userid>
-  namespace: ns-<userid>
+  name: helloworld-deployment-leandrok
+  namespace: ns-leandrok
 spec:
   selector:
     matchLabels:
@@ -16,18 +16,18 @@ spec:
       containers:
       - name: helloworld
     # enter the path to your image, be sure to include the correct region prefix    
-        image: <region-key>.ocir.io/<tenancy-namespace>/<repo-name>:<tag>
+        image: iad.ocir.io/ocuocictrng29/iad-dop-lab07-1-ocir-1/oci_sample_webapp_leandrok:{BUILDRUN_HASH}
         ports:
         - containerPort: 80
       imagePullSecrets:
     # enter the name of the secret you created  
-      - name: <secret-name>
+      - name: ocir-secret-leandrok
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: helloworld-service-<userid>
-  namespace: ns-<userid>
+  name: helloworld-service-leandrok
+  namespace: ns-leandrok
   annotations:
     oci.oraclecloud.com/load-balancer-type: "lb"
     service.beta.kubernetes.io/oci-load-balancer-shape: "flexible"
